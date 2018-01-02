@@ -30,7 +30,7 @@
                                 @if($delivery->order_id == $item->id)
                                     <tr>                                        
                                         <td>{{ $user->name }}</td><td>{{ $delivery->buyer }}</td><td>{{ $item->price }}</td>
-                                        <td>
+                                        <td>                                            
                                             <a href="{{ url('/orders/' . $item->id) }}" title="View Order"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/orders/' . $item->id . '/edit') }}" title="Edit Order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
