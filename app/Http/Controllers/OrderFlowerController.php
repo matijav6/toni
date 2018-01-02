@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\OrderDelivery;
 use App\OrderFlower;
 use App\Flower;
 use App\Color;
 
 use Illuminate\Http\Request;
 
-class OrderDeliveryController extends Controller
+class OrderFlowerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,15 +24,16 @@ class OrderDeliveryController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $orderdelivery = OrderDelivery::where('buyer', 'LIKE', "%$keyword%")
-                ->orWhere('address', 'LIKE', "%$keyword%")
+            $orderflower = OrderFlower::where('flower_id', 'LIKE', "%$keyword%")
+                ->orWhere('color_id', 'LIKE', "%$keyword%")
+                ->orWhere('quantity', 'LIKE', "%$keyword%")
                 ->orWhere('order_id', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
         } else {
-            $orderdelivery = OrderDelivery::paginate($perPage);
+            $orderflower = OrderFlower::paginate($perPage);
         }
 
-        return view('order-delivery.index', compact('orderdelivery'));
+        return view('order-flower.index', compact('orderflower'));
     }
 
     /**
@@ -41,9 +41,11 @@ class OrderDeliveryController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create($id)
     {
-        return view('order-delivery.create');
+        $flowers = Flower::orderBy('flower_name','asc')->get();
+        $colors = Color::orderBy('color_name','asc')->get();
+        return view('order-flower.create',compact('flowers','colors'));
     }
 
     /**
@@ -58,16 +60,9 @@ class OrderDeliveryController extends Controller
         
         $requestData = $request->all();
         
-        OrderDelivery::create($requestData);
+        OrderFlower::create($requestData);
 
-        $flowers = Flower::orderBy('flower_name','asc')->get();
-        $colors = Color::orderBy('color_name','asc')->get();
-        $order_id = array(
-            'id' => $requestData['order_id'],
-        );
-        return view('order-flower.create',compact('flowers','colors','order_id'));
-        
-        //return redirect('order-delivery')->with('flash_message', 'OrderDelivery added!');
+        return redirect('orders')->with('flash_message', 'added!');
     }
 
     /**
@@ -79,9 +74,9 @@ class OrderDeliveryController extends Controller
      */
     public function show($id)
     {
-        $orderdelivery = OrderDelivery::findOrFail($id);
+        $orderflower = OrderFlower::findOrFail($id);
 
-        return view('order-delivery.show', compact('orderdelivery'));
+        return view('order-flower.show', compact('orderflower'));
     }
 
     /**
@@ -93,9 +88,9 @@ class OrderDeliveryController extends Controller
      */
     public function edit($id)
     {
-        $orderdelivery = OrderDelivery::findOrFail($id);
+        $orderflower = OrderFlower::findOrFail($id);
 
-        return view('order-delivery.edit', compact('orderdelivery'));
+        return view('order-flower.edit', compact('orderflower'));
     }
 
     /**
@@ -111,22 +106,10 @@ class OrderDeliveryController extends Controller
         
         $requestData = $request->all();
         
-        $orderdelivery = OrderDelivery::findOrFail($id);
-        $orderdelivery->update($requestData);
-        $order_id = array(
-            'id' => $requestData['order_id'],
-        );
-        $orderflower = OrderFlower::where('order_id','=', $requestData['order_id']);
-
-        foreach($orderflower as $item)
-        {
-            $id = $item->id;
-        }
         $orderflower = OrderFlower::findOrFail($id);
-        $flowers = Flower::orderBy('flower_name','asc')->get();
-        $colors = Color::orderBy('color_name','asc')->get();
-       // return redirect('order-delivery')->with('flash_message', 'OrderDelivery updated!');
-        return view('order-flower.edit', compact('order_id','orderflower','flowers','colors'));
+        $orderflower->update($requestData);
+
+        return redirect('orders')->with('flash_message', 'OrderFlower updated!');
     }
 
     /**
@@ -138,8 +121,8 @@ class OrderDeliveryController extends Controller
      */
     public function destroy($id)
     {
-        OrderDelivery::destroy($id);
+        OrderFlower::destroy($id);
 
-        return redirect('order-delivery')->with('flash_message', 'OrderDelivery deleted!');
+        return redirect('order-flower')->with('flash_message', 'OrderFlower deleted!');
     }
 }

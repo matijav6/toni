@@ -10,7 +10,9 @@ use Auth;
 use App\Office;
 use App\User;
 use App\OrderDelivery;
-
+use App\OrderFlower;
+use App\Flower;
+use App\Color;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -26,8 +28,9 @@ class OrdersController extends Controller
         $users = User::orderBy('id','asc')->get();
         $offices = Office::orderBy('id','asc')->get();
         $orders = Order::paginate($perPage);
-        $deliverys = OrderDelivery::orderBy('id','asc')->get();
-        return view('orders.index', compact('orders','users','offices','deliverys'));
+
+        $deliverys = OrderDelivery::orderBy('id','asc')->get();        
+        return view('orders.index', compact('orders','users','offices','deliverys','flowers'));
     }
 
     /**
@@ -76,7 +79,12 @@ class OrdersController extends Controller
         $offices = Office::where('id','=',$order->office_id)->get();
         $users = User::where('id','=',$order->user_id)->get();
         $deliverys = OrderDelivery::where('order_id','=',$id)->get();
-        return view('orders.show', compact('order','users','offices','deliverys'));
+
+        $flowers_id = OrderFlower::where('order_id','=',$id)->get();
+
+        $flowers = Flower::orderBy('id','asc')->get();
+        $colors = Color::orderBy('id','asc')->get();
+        return view('orders.show', compact('order','users','offices','deliverys','flowers','colors','flowers_id'));
     }
 
     /**
@@ -116,6 +124,7 @@ class OrdersController extends Controller
             'id' => $order->id,
         );
         $orderdelivery = OrderDelivery::where('order_id', '=',$order->id )->get();
+        
         foreach($orderdelivery as $item)
         {
             $id = $item->id;

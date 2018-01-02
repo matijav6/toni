@@ -33,4 +33,5 @@ Route::group(['middleware' => ['admin']], function () {
 Route::group(['middleware' => ['admin']], function () {
     Route::resource('orders', 'OrdersController');
     Route::resource('order-delivery', 'OrderDeliveryController');
+    Route::resource('order-flower', 'OrderFlowerController');
 });

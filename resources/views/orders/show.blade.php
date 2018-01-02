@@ -27,8 +27,21 @@
                                 @foreach($offices as $office)
                                 @foreach($users as $user)                                                                    
                                 @foreach($deliverys as $deliver)
-                                    <tr><th> User </th><td> {{ $user->name }} </td></tr><tr><th> Buyer </th><td> {{ $deliver->buyer }} </td></tr><tr><th> Address </th><td> {{ $deliver->address }} </td></tr><tr><th> Price </th><td> {{ $order->price }} </td></tr><tr><th> Note </th><td> {{ $order->note }} </td></tr><tr><th> Office </th><td> {{ $office->address }} </td></tr>
-                                @endforeach                                
+                                    <tr><th> User </th><td> {{ $user->name }} </td></tr><tr><th> Buyer </th><td> {{ $deliver->buyer }} </td></tr><tr><th> Address </th><td> {{ $deliver->address }} </td></tr><tr><th> Price </th><td> {{ $order->price }} </td></tr>
+                                    @foreach($flowers as $flower)
+                                    @foreach($colors as $color)
+                                    @foreach($flowers_id as $item)
+                                    @if($item->flower_id == $flower->id AND $item->color_id == $color->id)
+                                    <tr><th> Flower </th><td> {{ $flower->flower_name }} </td></tr>
+                                    <tr><th> Color </th><td> {{ $color->color_name }} </td></tr>
+                                    <tr><th> Quantity </th><td> {{ $item->quantity }} </td></tr>
+                                    @endif
+                                    @endforeach                                
+                                @endforeach
+                                @endforeach
+                                    <tr><th> Note </th><td> {{ $order->note }} </td></tr><tr><th> Office </th><td> {{ $office->address }} </td></tr>
+                                    
+                                @endforeach  
                                 @endforeach
                                 @endforeach
                                 </tbody>
