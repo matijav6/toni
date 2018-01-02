@@ -8,10 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ 'Cvjećarna' }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -29,7 +31,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ 'Cvjećarna' }}
                     </a>
                 </div>
 
@@ -37,6 +39,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                    </ul>
+
+                    <ul class="nav navbar-nav main-menu col-md-1">
+                        @if(Auth::user())
+                        <li> <a href="{{ url('/orders') }}" >                                           
+                                Orders
+                                </a>
+                            </li>                           
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

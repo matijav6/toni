@@ -7,8 +7,8 @@
         <div class="panel-body">
             <ul class="nav" role="tablist">
                 <li role="presentation">
-                    <a href="{{ url('/admin') }}">
-                        Dashboard
+                    <a href="{{ url('/orders/create') }}">
+                        New order
                     </a>
                 </li>
             </ul>

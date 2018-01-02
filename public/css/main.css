@@ -1,0 +1,16 @@
+body{
+    background-image: url(https://static.pexels.com/photos/101472/pexels-photo-101472.jpeg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.home{
+    font-size: 1.5em;
+}
+.navbar, .navbar-default, .navbar-static-top{
+    border: 0px solid;
+    box-shadow: inset 0px -3px 8px 0px #888888;
+}
+.main-menu{
+    font-size: 19px;
+    margin: 0 0% 0 40%;
+}
