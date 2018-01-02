@@ -13,7 +13,11 @@ class Colors extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('colors', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('color_name');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class Colors extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('colors');
     }
 }

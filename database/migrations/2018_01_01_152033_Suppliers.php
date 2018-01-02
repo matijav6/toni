@@ -13,7 +13,11 @@ class Suppliers extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('suppliers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('supplier_name');      
+            $table->timestamps();                  
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class Suppliers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('suppliers');
     }
 }

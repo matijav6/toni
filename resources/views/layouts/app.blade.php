@@ -41,6 +41,43 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                    @if(Auth::user())
+                        @if(Auth::user()->is_admin)
+                        <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                   Admin <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ url('/admin/users') }}" >                                           
+                                        Users
+                                        </a>                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/admin/colors') }}"     >                                       
+                                            Collors
+                                        </a>                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/admin/suppliers') }}">                                            
+                                            Suppliers
+                                        </a>                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/admin/offices') }}">                                            
+                                            Offices
+                                        </a>                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/admin/flowers') }}">                                            
+                                            Flowers
+                                        </a>                                       
+                                    </li>
+                                </ul>
+                            </li>
+                            @endif
+                        @endif
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>

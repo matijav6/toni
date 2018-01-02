@@ -13,7 +13,11 @@ class Flowers extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('flowers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('flower_name'); 
+            $table->timestamps();                       
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class Flowers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('flowers');
     }
 }

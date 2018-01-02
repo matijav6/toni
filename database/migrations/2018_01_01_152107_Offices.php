@@ -13,7 +13,11 @@ class Offices extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('offices', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('address');  
+            $table->timestamps();                      
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class Offices extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('offices');
     }
 }
