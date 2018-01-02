@@ -26,5 +26,11 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('admin/suppliers', 'Admin\\SuppliersController');
     Route::resource('admin/offices', 'Admin\\OfficesController');
     Route::resource('admin/flowers', 'Admin\\FlowersController');
+    Route::resource('admin/flowers-and-suppliers', 'Admin\\FlowersAndSuppliersController');
 
+});
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::resource('orders', 'OrdersController');
+    Route::resource('order-delivery', 'OrderDeliveryController');
 });

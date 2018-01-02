@@ -74,6 +74,11 @@
                                             Flowers
                                         </a>                                       
                                     </li>
+                                    <li>
+                                        <a href="{{ url('/admin/flowers-and-suppliers') }}">                                            
+                                            Flowers and suppliers
+                                        </a>                                       
+                                    </li>
                                 </ul>
                             </li>
                             @endif
